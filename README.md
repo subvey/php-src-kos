@@ -121,6 +121,16 @@ $ ./kos/tests/cross-build.sh hw
 ```
 For more information about running tests on Raspberry Pi 4 B or Radxa ROCK 3A see the following [link](https://click.kaspersky.com/?hl=en-us&link=online_help&pid=kos&version=1.3&customization=KCE&helpid=running_sample_programs_rpi).
 
+Note:
+In case of building tests to run on Radxa ROCK 3A, `kos-image` may not run correctly (according to the known size limitations of `kos-image` in the below [link](https://support.kaspersky.com/help/KCE/1.3/en-US/limitations_and_known_problems.htm)). To avoid this, you should shift the FDT loadable address in u-boot, for example:
+```
+setenv fdt_addr_r 0xa0000000
+```
+If you do not want to shift the FDT loadable address on every boot, you can also save the u-boot environment with the following command:
+```
+saveenv
+```
+
 If you want to save test results to a file, go to the directory `./kos/tests` and run the following command:
 ```
 ./kos/tests/cross-build.sh qemu > log.txt
